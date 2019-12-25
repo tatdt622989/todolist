@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ch-TW">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0 , user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>待辦清單</title>
+    <link rel="stylesheet" href="./css/all.css"/>
+    <script src="./js/vendors.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>待辦清單</h1>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="input-wrap">
+              <input type="text" placeholder="請新增待辦任務吧！" v-model="inputTodo" @keyup.enter="addTodo"/>
+              <button @click="addTodo">新增</button>
+            </div>
+            <div class="label-wrap">
+              <div class="label-btn-wrap">
+                <div></div>
+                <button>所有</button>
+                <div></div>
+              </div>
+              <div class="label-btn-wrap">
+                <div></div>
+                <button>進行中</button>
+                <div></div>
+              </div>
+              <div class="label-btn-wrap">
+                <div></div>
+                <button>已完成</button>
+                <div></div>
+              </div>
+            </div>
+            <div class="list-wrap">
+              <div v-for="(item, index) in todos">
+                <div>
+                  <input type="checkbox" name="todo" :id="item.id" v-model="item.complete"/>
+                  <div>
+                    <label :for="item.id"></label>
+                  </div><span>{{ item.title }}</span>
+                  <button @click="removeTodo(index)"></button>
+                </div>
+                <hr/>
+              </div>
+            </div>
+            <div class="dashboard-wrap">
+              <p>{{ todos.length }}&nbsp;筆任務進行中</p>
+              <p>清除所有任務</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./js/all.js"></script>
+  </body>
+</html>
