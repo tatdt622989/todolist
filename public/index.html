@@ -19,36 +19,39 @@
               <button @click="addTodo">新增</button>
             </div>
             <div class="label-wrap">
-              <div class="label-btn-wrap">
-                <div></div>
+              <div :class="{'label-active' : currentLabel == 'all'}" @click="currentLabel = 'all'" class="label-btn-wrap">
+                <div class="left-wing"></div>
                 <button>所有</button>
-                <div></div>
+                <div class="right-wing"></div>
               </div>
-              <div class="label-btn-wrap">
-                <div></div>
+              <div :class="{'label-active' : currentLabel == 'processing'}" @click="currentLabel = 'processing'" class="label-btn-wrap">
+                <div class="left-wing"></div>
                 <button>進行中</button>
-                <div></div>
+                <div class="right-wing"></div>
               </div>
-              <div class="label-btn-wrap">
-                <div></div>
+              <div :class="{'label-active' : currentLabel == 'completed'}" @click="currentLabel = 'completed'" class="label-btn-wrap">
+                <div class="left-wing"></div>
                 <button>已完成</button>
-                <div></div>
+                <div class="right-wing"></div>
               </div>
             </div>
             <div class="list-wrap">
-              <div v-for="(item, index) in todos">
+              <div v-for="(item, index) in filteredTodos" @dblclick="editTodo(item)" class="todo-wrap">
                 <div>
-                  <input type="checkbox" name="todo" :id="item.id" v-model="item.complete"/>
-                  <div>
+                  <input type="checkbox" name="todo" :id="item.id" v-model="item.completed"/>
+                  <div class="checkbox-wrap">
                     <label :for="item.id"></label>
                   </div><span>{{ item.title }}</span>
                   <button @click="removeTodo(index)"></button>
                 </div>
                 <hr/>
+                <div class="edit-wrap">
+                  <input type="text"/>
+                </div>
               </div>
             </div>
             <div class="dashboard-wrap">
-              <p>{{ todos.length }}&nbsp;筆任務進行中</p>
+              <p>{{ processingTodo }}&nbsp;筆任務進行中</p>
               <p>清除所有任務</p>
             </div>
           </div>
