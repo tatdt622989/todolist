@@ -378,6 +378,15 @@ p {
   margin: 0;
 }
 
+input {
+  border: 0;
+  padding: 0;
+}
+
+input:focus {
+  outline: 0;
+}
+
 .container-fluid {
   padding-right: 16px;
   padding-left: 16px;
@@ -508,12 +517,6 @@ p {
 
 .input-wrap input {
   color: #808080;
-  border: 0;
-  padding: 0;
-}
-
-.input-wrap input:focus {
-  outline: 0;
 }
 
 .input-wrap input::-webkit-input-placeholder {
@@ -868,27 +871,19 @@ p {
 }
 
 .list-wrap .todo-wrap {
-  line-height: 1;
   width: 100%;
 }
 
 .list-wrap .todo-wrap > div {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 
 .list-wrap .todo-wrap > div input[type="checkbox"] {
   visibility: hidden;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .list-wrap .todo-wrap > div input[type="checkbox"]:checked + .checkbox-wrap label {
@@ -902,16 +897,22 @@ p {
 }
 
 .list-wrap .todo-wrap > div > .checkbox-wrap {
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
+  width: 44px;
+  height: 44px;
   position: absolute;
   top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
-  left: 0;
-  background-color: #D9D8D8;
+  left: -11px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .list-wrap .todo-wrap > div > .checkbox-wrap label {
@@ -927,23 +928,35 @@ p {
   -webkit-transition: all .2s ease-in;
   -o-transition: all .2s ease-in;
   transition: all .2s ease-in;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.list-wrap .todo-wrap > div > .checkbox-wrap div {
+  width: 22px;
+  height: 22px;
+  background-color: #D9D8D8;
+  border-radius: 5px;
 }
 
 .list-wrap .todo-wrap > div span {
   color: #6683E1;
-  margin-left: 24px;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  margin-left: 36px;
+  margin-right: 36px;
+  line-height: 44px;
+  width: auto;
+  display: block;
+  word-wrap: break-word;
 }
 
-.list-wrap .todo-wrap > div button {
+.list-wrap .todo-wrap > div > button {
   cursor: pointer;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   border: 0;
   background: url("../images/icon-remove.svg") center center/20px 20px;
   background-repeat: no-repeat;
@@ -954,9 +967,178 @@ p {
   padding-bottom: 0;
   color: initial;
   font-size: initial;
+  position: absolute;
+  top: 0;
+  right: -11px;
+}
+
+.list-wrap .todo-wrap .edit-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 44px;
+}
+
+@media screen and (min-width: 320px) {
+  .list-wrap .todo-wrap .edit-wrap input {
+    font-size: 18px;
+    text-indent: 12px;
+  }
+  .list-wrap .todo-wrap .edit-wrap button:nth-child(2) {
+    cursor: pointer;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 60px;
+    height: 44px;
+    border: 0;
+    background: #B3B3B3;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    font-size: 18px;
+  }
+  .list-wrap .todo-wrap .edit-wrap button:nth-child(3) {
+    cursor: pointer;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 60px;
+    height: 44px;
+    border: 0;
+    background: #6683E1;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .list-wrap .todo-wrap .edit-wrap input {
+    font-size: 20px;
+    text-indent: 14px;
+  }
+  .list-wrap .todo-wrap .edit-wrap button:nth-child(2) {
+    cursor: pointer;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 80px;
+    height: 44px;
+    border: 0;
+    background: #B3B3B3;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    font-size: 20px;
+  }
+  .list-wrap .todo-wrap .edit-wrap button:nth-child(3) {
+    cursor: pointer;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 80px;
+    height: 44px;
+    border: 0;
+    background: #6683E1;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    font-size: 20px;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .list-wrap .todo-wrap .edit-wrap input {
+    font-size: 24px;
+    text-indent: 16px;
+  }
+  .list-wrap .todo-wrap .edit-wrap button:nth-child(2) {
+    cursor: pointer;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 90px;
+    height: 44px;
+    border: 0;
+    background: #B3B3B3;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    font-size: 24px;
+  }
+  .list-wrap .todo-wrap .edit-wrap button:nth-child(3) {
+    cursor: pointer;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 90px;
+    height: 44px;
+    border: 0;
+    background: #6683E1;
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    font-size: 24px;
+  }
+}
+
+.list-wrap .todo-wrap .edit-wrap input {
+  border: 1px solid #BFBFBF;
+  border-radius: 30px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0;
+  height: calc(100% - 2px);
+  color: #808080;
+  display: block;
+}
+
+.list-wrap .todo-wrap .edit-wrap > button {
+  position: static;
+  margin-left: 8px;
+  background-image: none;
+  -webkit-transition: all .2s ease-in;
+  -o-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+}
+
+.list-wrap .todo-wrap .edit-wrap > button:nth-child(2):hover, .list-wrap .todo-wrap .edit-wrap > button:nth-child(2):active {
+  background-color: #BFBFBF;
+}
+
+.list-wrap .todo-wrap .edit-wrap > button:nth-child(3):hover, .list-wrap .todo-wrap .edit-wrap > button:nth-child(3):active {
+  background-color: #7494FF;
 }
 
 .list-wrap .todo-wrap hr {
+  margin: 10px 0 10px 0;
   border: 0.5px solid #D9D8D8;
 }
 
@@ -1007,6 +1189,14 @@ p {
 
 .dashboard-wrap p:nth-child(2) {
   color: #e6e6e6;
+  cursor: pointer;
+  -webkit-transition: all .2s ease-in;
+  -o-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+}
+
+.dashboard-wrap p:nth-child(2):hover, .dashboard-wrap p:nth-child(2):active {
+  color: #fff;
 }
 
 /*# sourceMappingURL=all.css.map */

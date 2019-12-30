@@ -19,17 +19,17 @@
               <button @click="addTodo">新增</button>
             </div>
             <div class="label-wrap">
-              <div :class="{'label-active' : currentLabel == 'all'}" @click="currentLabel = 'all'" class="label-btn-wrap">
+              <div :class="{'label-active' : currentLabel == 'all'}" @click="labelChange('all')" class="label-btn-wrap">
                 <div class="left-wing"></div>
                 <button>所有</button>
                 <div class="right-wing"></div>
               </div>
-              <div :class="{'label-active' : currentLabel == 'processing'}" @click="currentLabel = 'processing'" class="label-btn-wrap">
+              <div :class="{'label-active' : currentLabel == 'processing'}" @click="labelChange('processing');" class="label-btn-wrap">
                 <div class="left-wing"></div>
                 <button>進行中</button>
                 <div class="right-wing"></div>
               </div>
-              <div :class="{'label-active' : currentLabel == 'completed'}" @click="currentLabel = 'completed'" class="label-btn-wrap">
+              <div :class="{'label-active' : currentLabel == 'completed'}" @click="labelChange('completed')" class="label-btn-wrap">
                 <div class="left-wing"></div>
                 <button>已完成</button>
                 <div class="right-wing"></div>
@@ -37,22 +37,26 @@
             </div>
             <div class="list-wrap">
               <div v-for="(item, index) in filteredTodos" @dblclick="editTodo(item)" class="todo-wrap">
-                <div>
+                <div v-if="item.id != cacheTodo.id">
                   <input type="checkbox" name="todo" :id="item.id" v-model="item.completed"/>
                   <div class="checkbox-wrap">
-                    <label :for="item.id"></label>
+                    <div>
+                      <label :for="item.id"></label>
+                    </div>
                   </div><span>{{ item.title }}</span>
-                  <button @click="removeTodo(index)"></button>
+                  <button @click="removeTodo(item)"></button>
+                </div>
+                <div v-if="item.id == cacheTodo.id" class="edit-wrap">
+                  <input type="text" v-model="cacheTitle" size="1"/>
+                  <button @click="cancelTodo">取消</button>
+                  <button @click="doneTodo(item)">完成</button>
                 </div>
                 <hr/>
-                <div class="edit-wrap">
-                  <input type="text"/>
-                </div>
               </div>
             </div>
             <div class="dashboard-wrap">
               <p>{{ processingTodo }}&nbsp;筆任務進行中</p>
-              <p>清除所有任務</p>
+              <p @click="clearTodos">清除所有任務</p>
             </div>
           </div>
         </div>

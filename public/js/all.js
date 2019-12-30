@@ -1,25 +1,27 @@
 "use strict";
 
-// Vue.component('list-component', {
-//   data: function() {
-//     return{
-//       listData: '你好'
-//     }
-//   },
-//   template: 
-//   `
-//     <input type="checkbox" name="list" id="list">
-//     <label for="list"></label>
-//   `
-// });
 var app = new Vue({
   el: '#app',
   data: {
     todos: [],
     inputTodo: '',
     currentLabel: 'all',
-    cacheTodo: [],
-    cahgeTitle: ''
+    cacheTodo: {},
+    cacheTitle: ''
+  },
+  mounted: function mounted() {
+    if (localStorage.getItem('todos')) {
+      this.todos = JSON.parse(localStorage.getItem('todos'));
+    }
+  },
+  watch: {
+    todos: {
+      handler: function handler(newTodos) {
+        var parsed = JSON.stringify(newTodos);
+        localStorage.setItem('todos', parsed);
+      },
+      deep: true
+    }
   },
   methods: {
     addTodo: function addTodo() {
@@ -39,13 +41,39 @@ var app = new Vue({
       });
       this.inputTodo = '';
     },
-    removeTodo: function removeTodo(index) {
-      console.log(index);
-      this.todos.splice(index, 1);
+    removeTodo: function removeTodo(item) {
+      // 當findIndex執行的函式內的return的條件達成，會回傳第一個達成條件的index值
+      var newIndex = this.todos.findIndex(function (obj) {
+        return obj.id == item.id;
+      });
+      this.todos.splice(newIndex, 1);
     },
     editTodo: function editTodo(item) {
-      cacheTodo = item;
-      cacheTitle = itme.title;
+      this.cacheTodo = item;
+      this.cacheTitle = item.title;
+    },
+    cancelTodo: function cancelTodo() {
+      this.cacheTodo = {};
+      this.cacheTitle = '';
+    },
+    doneTodo: function doneTodo(item) {
+      item.title = this.cacheTitle;
+      this.cacheTitle = '';
+      this.cacheTodo = {};
+    },
+    labelChange: function labelChange(label) {
+      this.currentLabel = label;
+      this.cacheTitle = '';
+      this.cacheTodo = {};
+    },
+    clearTodos: function clearTodos() {
+      var feedback = confirm('確定要刪除全部任務嗎?');
+
+      if (feedback) {
+        this.todos = [];
+      } else {
+        return;
+      }
     }
   },
   computed: {
